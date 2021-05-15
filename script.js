@@ -1,14 +1,17 @@
 // when changed rows/columns/bones will change
 // used to scale rest of the game
 const NUM_BONES = 5;
+
 // creates dimension of grid
 let totalSquares = NUM_BONES * NUM_BONES;
+
 //number for squares
 let initial = 1;
+
 //number of bones left
 let number = NUM_BONES;
 
-//danger bar
+//danger bar progress
 let width = 0;
 
 //functions that run when document ready
@@ -16,12 +19,14 @@ $(document).ready(function () {
     createGrid();
     hideBone();
 });
+
 //creates number in square
 function squareNumber() {
     if (initial <= totalSquares) {
         return (initial++);
     }
 }
+
 //creates squares and gives function to squares
 function createSquare() {
     //grabs board
@@ -44,6 +49,7 @@ function createSquare() {
     //append the square to the board
     board.append(square);
 }
+
 //creates square grid with NUM_BONES
 function createGrid() {
     //display number of bones left
@@ -64,6 +70,7 @@ function createGrid() {
         numRowsCreated++
     }
 }
+
 //creates squares with bones
 function hideBone(){
     for (let hidden = 0; hidden <= NUM_BONES; hidden++) {
@@ -79,6 +86,17 @@ function hideBone(){
         $("span.square").off("cllick");
     }
 }
+
+//generates a random number between (1/NUM_BONES**2) and (3/NUM_BONES**2)
+function generateRandomNumber() {
+    //the danger meter is increased by a random percent between (1/NUM_BONES**2) and (3/NUM_BONES**2)
+    let min = (1/NUM_BONES**2)*100; //.04
+    let max = (4/NUM_BONES**2)*100; //.16
+    let randomPercent = Math.floor(Math.random() * (max-min) + min);
+    console.log(randomPercent);
+    return randomPercent;
+}
+
 //action activated when a square is clicked
 function playerGuess() {
     //target the span
@@ -128,15 +146,6 @@ function playerGuess() {
     }
 }
 
-//generates a random number between (1/NUM_BONES**2) and (3/NUM_BONES**2)
-function generateRandomNumber() {
-    //the danger meter is increased by a random percent between (1/NUM_BONES**2) and (3/NUM_BONES**2)
-    let min = (1/NUM_BONES**2)*100; //.04
-    let max = (4/NUM_BONES**2)*100; //.16
-    let randomPercent = Math.floor(Math.random() * (max-min) + min);
-    console.log(randomPercent);
-    return randomPercent;
-}
 
 
 
